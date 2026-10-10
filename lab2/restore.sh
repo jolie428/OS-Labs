@@ -43,6 +43,7 @@ while true; do
     case "$choice" in
         1)
             mv "$malicious_dir/$file" "$dir/"
+            echo "$file" >> whitelist.txt
             echo "$file has been restored to $dir"
             ;;
         2)
