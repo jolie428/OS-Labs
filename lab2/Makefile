@@ -11,4 +11,4 @@ restore: setup
 	./restore.sh ${DIR} ${MAL}
 
 setup:
-	mkdir -p ${DIR}
+	mkdir -p ${MAL}
