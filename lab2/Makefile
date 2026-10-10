@@ -2,7 +2,7 @@ DIR = test_dir
 MAL = malicious_dir
 Interval = 5 
 
-.PHony: run restore setup
+.PHONY: run restore setup
 
 run: setup
 	./antivirusd.sh ${DIR} ${MAL} ${Interval}

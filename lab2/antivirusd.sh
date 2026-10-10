@@ -9,13 +9,13 @@ dir="$1"
 malicious_dir="$2"
 interval="$3"
 
-Extensions= "exe bat vbs scr ps1"
-Keywords= "virus|trojan|malware|worm|ransomware"
+Extensions="exe bat vbs scr ps1"
+Keywords="virus|trojan|malware|worm|ransomware"
 
 mkdir -p "$malicious_dir"
 
 is_malicious() {
-    
+    file="$1"
     for ext in $Extensions; do
         if [[ "$file" == *.$ext ]]; then
             return 0
@@ -47,12 +47,12 @@ scan() {
 
 if [ ! -f directory-info.last ]; then
     scan
-    ls -1 "$dir" > directory-info.last
+    ls -l "$dir" > directory-info.last
 fi
 
 while true; do
     sleep "$interval"
-    ls -1 "$dir" > directory-info.new
+    ls -l "$dir" > directory-info.new
 
     if ! cmp -s directory-info.last directory-info.new; then
         echo "Directory contents changed. Scanning for malicious files..."

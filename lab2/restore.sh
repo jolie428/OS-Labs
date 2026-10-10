@@ -1,5 +1,7 @@
-if [ $# -ne 1 ]; then   
-    echo "Usage: $0 dir malicious_dir"
+#!/bin/bash
+
+if [ $# -ne 2 ]; then   
+    echo "2 arguments are required: dir malicious_dir"
     exit 1
 fi
 
@@ -7,12 +9,12 @@ dir="$1"
 malicious_dir="$2"
 
 if [ -z "$(ls -A "$malicious_dir" 2>/dev/null)" ]; then
-    echo "No malicious files found in $malicious_dir"  
+    echo "No malicious files found to review"  
     exit 0
 fi
 
 while true; do
-    files = ()
+    files=()
     for f in "$malicious_dir"/*; do
         [ -f "$f" ] && files+=("$(basename "$f")")
     done
@@ -34,7 +36,7 @@ while true; do
         continue
     fi
 
-    file ="${files[$((num - 1))]}"
+    file="${files[$((num - 1))]}"
     echo "1) Restore $file to $dir"
     echo "2) Permanently delete $file"
     echo "3) Leave $file as it is"
@@ -44,11 +46,11 @@ while true; do
         1)
             mv "$malicious_dir/$file" "$dir/"
             echo "$file" >> whitelist.txt
-            echo "$file has been restored to $dir"
+            echo "Restored $file to $dir"
             ;;
         2)
             rm "$malicious_dir/$file"
-            echo "$file has been permanently deleted"
+            echo "$file permanently deleted"
             ;;
         3)
             echo "$file remains in quarantine"
