@@ -29,7 +29,7 @@ is_malicious() {
         done
     fi
 
-   if grep -qE "$KEYWORDS" "$file"; then
+   if grep -qEia "$KEYWORDS" "$file"; then
         return 0
     fi
 
