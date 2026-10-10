@@ -9,7 +9,7 @@ dir="$1"
 malicious_dir="$2"
 
 if [ -z "$(ls -A "$malicious_dir" 2>/dev/null)" ]; then
-    echo "No malicious files found to review"  
+    echo "No malicious files to review"  
     exit 0
 fi
 
